@@ -1,0 +1,5 @@
+* Create directory structure
+  * Create lib & libTest file
+
+* Handle the default case of wc
+  * With one file

@@ -1,0 +1,26 @@
+{
+  "name": "wc-azimarif",
+  "version": "1.0.0",
+  "description": "wc command in node.js",
+  "main": "wc.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEP-tw/wc-azimarif.git"
+  },
+  "keywords": [
+    "wc"
+  ],
+  "author": "Arif",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEP-tw/wc-azimarif/issues"
+  },
+  "homepage": "https://github.com/STEP-tw/wc-azimarif#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
+  }
+}
