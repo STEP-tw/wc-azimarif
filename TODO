@@ -1,5 +1,6 @@
-* Create directory structure
-  * Create lib & libTest file
-
 * Handle the default case of wc
   * With one file
+
+* Extract count functions in string
+* Add formatter to justify the output including 
+  words. lines. characterss
