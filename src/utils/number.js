@@ -11,4 +11,8 @@ const addTwoList = function(list1, list2) {
   return addedList;
 };
 
-module.exports = { isNumber, addTwoList };
+const sum = function(number1, number2) {
+  return number1 + number2;
+};
+
+module.exports = { isNumber, addTwoList, sum };

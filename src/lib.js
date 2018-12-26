@@ -2,13 +2,10 @@ const {
   countLines,
   countWords,
   countCharacters,
-  SPACE
 } = require('../src/utils/string.js');
 
-const { justifyCount } = require('../src/formatter.js');
 const { parseInput } = require('../src/inputParser.js');
-const {singleFileFormatter, multipleFileFormatter} = require('../src/formatter.js');
-
+const { singleFileFormatter, multipleFileFormatter } = require('../src/formatter.js');
 
 const wc = function(userArgs, fs) {
   let { fileNames, options } = parseInput(userArgs);

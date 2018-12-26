@@ -1,15 +1,13 @@
-const { SPACE, NEWLINE, EMPTY_STRING } = require('../src/utils/string.js');
+const {
+  SPACE,
+  NEWLINE,
+  EMPTY_STRING,
+  rightJustifier
+} = require('../src/utils/string.js');
 const { addTwoList, isNumber } = require('../src/utils/number.js');
 
-const repeat = function(character, count) {
-  return new Array(count).fill(character).join('');
-};
-
-const justifyCount = function(count) {
-  let countLength = count.toString().length;
-  let numberOfSpace = 8 - countLength;
-  return repeat(SPACE, numberOfSpace) + count;
-};
+const WIDTH = 8;
+const justifyCount = rightJustifier.bind(null, WIDTH);
 
 const singleFileFormatter = function(fileDetail) {
   let formattedOutput = fileDetail.count.map(count => justifyCount(count));
