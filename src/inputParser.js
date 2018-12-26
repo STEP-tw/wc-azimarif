@@ -6,8 +6,8 @@ const parseInput = function (userArgs) {
   let fileNames = userArgs.slice(options.length);
   options = options.map((option) => option.replace(HYPHEN, EMPTY_STRING));
   options = options.join(EMPTY_STRING).split(EMPTY_STRING);
-  
-  if (options.length == 0) {
+
+  if (options.length < 1) {
     options = ['l', 'w', 'c'];
   }
   return createParameterObject(mapOptions(options), fileNames, getFormatter(fileNames));

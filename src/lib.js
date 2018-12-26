@@ -7,27 +7,32 @@ const {
 
 const { justifyCount } = require('../src/formatter.js');
 const { parseInput } = require('../src/inputParser.js');
+const {singleFileFormatter, multipleFileFormatter} = require('../src/formatter.js');
+
 
 const wc = function(userArgs, fs) {
-  let { fileNames, options, formatter } = parseInput(userArgs);
-  //console.log(parseInput(userArgs));
+  let { fileNames, options } = parseInput(userArgs);
   let justifiedCount = [];
   fileNames.forEach(fileName => {
     let fileCountDetail = getFileCountDetail(fileName, options, fs);
     justifiedCount.push(fileCountDetail);
   });
-  return formatter(justifiedCount);
+  if(fileNames.length > 1){
+    return multipleFileFormatter(justifiedCount);
+  }
+  fileDetail = justifiedCount[0];
+  return singleFileFormatter(fileDetail);
 };
 
-const getFileCountDetail = function(fileName, options, fs) {
+const getFileCountDetail = function (fileName, options, fs) {
   const fileContent = readFile(fileName, fs);
-  let fileCountDetail = '';
+  let fileDetail = { count: [], fileName };
   options.forEach(option => {
     let operation = selectOption(option);
     let count = operation(fileContent);
-    fileCountDetail = fileCountDetail + justifyCount(count);
+    fileDetail.count.push(count);
   });
-  return fileCountDetail + SPACE + fileName;
+  return fileDetail;
 };
 
 const selectOption = function (option) {
