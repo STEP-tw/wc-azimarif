@@ -2,14 +2,15 @@ const { EMPTY_STRING, HYPHEN } = require('../src/utils/string.js');
 const {singleFileFormatter, multipleFileFormatter} = require('../src/formatter.js');
 
 const parseInput = function (userArgs) {
-  let firstArg = userArgs[0];
-  let fileNames = userArgs.slice(1);
-
-  if (hasOption(firstArg)) {
-    let options = firstArg.slice(1).split(EMPTY_STRING);
-    return createParameterObject(mapOptions(options), fileNames, getFormatter(fileNames));
+  let options = userArgs.filter((userArg) => hasOption(userArg));
+  let fileNames = userArgs.slice(options.length);
+  options = options.map((option) => option.replace(HYPHEN, EMPTY_STRING));
+  options = options.join(EMPTY_STRING).split(EMPTY_STRING);
+  
+  if (options.length == 0) {
+    options = ['l', 'w', 'c'];
   }
-  return createParameterObject(['line', 'word', 'character'], userArgs, getFormatter(userArgs));
+  return createParameterObject(mapOptions(options), fileNames, getFormatter(fileNames));
 };
 
 const getFormatter = function (files) {

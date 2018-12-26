@@ -10,6 +10,7 @@ const { parseInput } = require('../src/inputParser.js');
 
 const wc = function(userArgs, fs) {
   let { fileNames, options, formatter } = parseInput(userArgs);
+  //console.log(parseInput(userArgs));
   let justifiedCount = [];
   fileNames.forEach(fileName => {
     let fileCountDetail = getFileCountDetail(fileName, options, fs);
