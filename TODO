@@ -1,6 +1,11 @@
 * Handle the default case of wc
-  * With one file
+  * With multiple file
 
-* Extract count functions in string
-* Add formatter to justify the output including 
-  words. lines. characterss
+* Handle wc -l for single file
+* Handle wc -c for single file
+* Handle wc -w for single file
+
+* Test cases for parser
+* Test cases for justifier
+
+** Change wc to handle multiple files

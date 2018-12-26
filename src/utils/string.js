@@ -1,6 +1,7 @@
 const NEWLINE = '\n';
 const SPACE = ' ';
 const EMPTY_STRING = '';
+const HYPHEN = '-';
 
 const countLines = function (content) {
   return content.split(NEWLINE).length - 1;
@@ -28,5 +29,7 @@ const countCharacters = function (content) {
 module.exports = {
   countLines,
   countWords,
-  countCharacters
+  countCharacters,
+  SPACE,
+  HYPHEN
 }

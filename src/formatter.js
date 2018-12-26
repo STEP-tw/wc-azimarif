@@ -1,11 +1,13 @@
+const { SPACE } = require('../src/utils/string.js');
+
 const repeat = function (character, count) {
   return new Array(count).fill(character).join('');
 }
 
-const justifyWordCount = function (count) {
+const justifyCount = function (count) {
   let countLength = count.toString().length;
   let numberOfSpace = 8 - countLength;
-  return repeat(' ', numberOfSpace) + count;
+  return repeat(SPACE, numberOfSpace) + count;
 }
 
-module.exports = { justifyWordCount }
+module.exports = { justifyCount }

@@ -33,7 +33,7 @@ const fs = require('fs');
 const { wc } = require('./src/lib.js');
 
 const main = function () {
-  let userArgs = process.argv[2];
+  let userArgs = process.argv.slice(2);
   let wcResult = wc(userArgs, fs);
   console.log(wcResult);
 }
