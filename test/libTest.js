@@ -5,16 +5,16 @@ const files = {
   numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].join(' '),
   characters: ['a', 'b', 'c', 'd', 'e'].join(),
   multiLineFile: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].join('\n')
-}
+};
 
 const fs = {
-  readFileSync: function (fileName) {
+  readFileSync: function(fileName) {
     return files[fileName];
   },
-  existsSync: function (fileName) {
+  existsSync: function(fileName) {
     return files.hasOwnProperty(fileName);
   }
-}
+};
 
 describe('wc', () => {
   it('should return number of lines, words & characters in a file with file name', () => {
@@ -59,5 +59,13 @@ describe('wc', () => {
 
     expectedOutput = '      20 multiLineFile';
     assert.deepEqual(wc(['-c', 'multiLineFile'], fs), expectedOutput);
+  });
+
+  it('should return number of lines, words & characters in a file with file name when multiple file is given', () => {
+    let expectedOutput =
+      '       0      10      20 numbers\n' +
+      '       0       1       9 characters\n' +
+      '       0      11      29 total';
+    assert.deepEqual(wc(['numbers', 'characters'], fs), expectedOutput);
   });
 });

@@ -1,4 +1,5 @@
 const { EMPTY_STRING, HYPHEN } = require('../src/utils/string.js');
+const {singleFileFormatter, multipleFileFormatter} = require('../src/formatter.js');
 
 const parseInput = function (userArgs) {
   let firstArg = userArgs[0];
@@ -6,10 +7,18 @@ const parseInput = function (userArgs) {
 
   if (hasOption(firstArg)) {
     let options = firstArg.slice(1).split(EMPTY_STRING);
-    return createParameterObject(mapOptions(options), fileNames);
+    return createParameterObject(mapOptions(options), fileNames, getFormatter(fileNames));
   }
-  return createParameterObject(['line', 'word', 'character'], userArgs);
+  return createParameterObject(['line', 'word', 'character'], userArgs, getFormatter(userArgs));
 };
+
+const getFormatter = function (files) {
+  let formatter = singleFileFormatter;
+  if (files.length > 1) {
+    formatter = multipleFileFormatter;
+  }
+  return formatter;
+}
 
 const mapOptions = function (userOptions) {
   let options = {
@@ -17,11 +26,15 @@ const mapOptions = function (userOptions) {
     word: 'w',
     character: 'c'
   };
-  return Object.keys(options).filter((option)=> userOptions.includes(options[option]));
+  return getKeys(options).filter((option)=> userOptions.includes(options[option]));
 };
 
-const createParameterObject = function (options, fileNames) {
-  return { options, fileNames };
+const getKeys = function (object) {
+  return Object.keys(object);
+}
+
+const createParameterObject = function (options, fileNames, formatter) {
+  return { options, fileNames, formatter };
 };
 
 const hasOption = function (option) {
