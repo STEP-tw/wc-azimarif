@@ -5,7 +5,6 @@ const { parseInput } = require('../src/inputParser.js');
 const wc = function (userArgs, fs) {
   let { fileNames, options } = parseInput(userArgs);
   let justifiedCount = '';
-
   const fileContent = readFile(fileNames[0], fs);
   options.forEach((option) => {
     let operation = selectOption(option);

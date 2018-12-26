@@ -31,5 +31,6 @@ module.exports = {
   countWords,
   countCharacters,
   SPACE,
-  HYPHEN
+  HYPHEN,
+  EMPTY_STRING
 }

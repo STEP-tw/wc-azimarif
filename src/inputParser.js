@@ -11,13 +11,13 @@ const parseInput = function (userArgs) {
   return createParameterObject(['line', 'word', 'character'], userArgs);
 };
 
-const mapOptions = function (options) {
-  let possibleOptions = {
-    l: 'line',
-    w: 'word',
-    c: 'character'
+const mapOptions = function (userOptions) {
+  let options = {
+    line: 'l',
+    word: 'w',
+    character: 'c'
   };
-  return options.map(option => possibleOptions[option]);
+  return Object.keys(options).filter((option)=> userOptions.includes(options[option]));
 };
 
 const createParameterObject = function (options, fileNames) {
