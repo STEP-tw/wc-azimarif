@@ -6,18 +6,19 @@ const {
 
 const { parseInput } = require('../src/inputParser.js');
 const { singleFileFormatter, multipleFileFormatter } = require('../src/formatter.js');
+const { readFile, isSingleFile } = require('../src/fileLib.js');
 
-const wc = function(userArgs, fs) {
+const wc = function (userArgs, fs) {
   let { fileNames, options } = parseInput(userArgs);
   let justifiedCount = [];
   fileNames.forEach(fileName => {
     let fileCountDetail = getFileCountDetail(fileName, options, fs);
     justifiedCount.push(fileCountDetail);
   });
-  if(fileNames.length > 1){
+  if (!isSingleFile(fileNames)) {
     return multipleFileFormatter(justifiedCount);
   }
-  fileDetail = justifiedCount[0];
+  let fileDetail = justifiedCount[0];
   return singleFileFormatter(fileDetail);
 };
 
@@ -40,9 +41,5 @@ const selectOption = function (option) {
   }
   return options[option];
 }
-
-const readFile = function (fileName, fs) {
-  return fs.readFileSync(fileName, 'utf-8');
-};
 
 module.exports = { wc }
