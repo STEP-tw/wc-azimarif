@@ -6,8 +6,8 @@ const {
 } = require('../src/utils/string.js');
 const { addTwoList, isNumber } = require('../src/utils/number.js');
 
-const WIDTH = 8;
-const justifyCount = rightJustifier.bind(null, WIDTH);
+const COUNT_WIDTH = 8;
+const justifyCount = rightJustifier.bind(null, COUNT_WIDTH);
 
 const singleFileFormatter = function(fileDetail) {
   let formattedOutput = fileDetail.count.map(count => justifyCount(count));

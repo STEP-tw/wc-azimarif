@@ -1,6 +1,5 @@
-* Handle the default case of wc
-  * With multiple file
+** Handle file not found error message
 
-** Change wc to handle multiple files
+** Handle illegal option
 
-** All the possible combination of wlc to be handled
+** Handle file not found error message for multiple files
