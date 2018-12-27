@@ -10,30 +10,30 @@ const { readFile, isSingleFile } = require('../src/fileLib.js');
 
 const wc = function (userArgs, fs) {
   let { fileNames, options } = parseInput(userArgs);
-  let justifiedCount = [];
+  let fileDetails = [];
   fileNames.forEach(fileName => {
     let fileCountDetail = getFileCountDetail(fileName, options, fs);
-    justifiedCount.push(fileCountDetail);
+    fileDetails.push(fileCountDetail);
   });
   if (!isSingleFile(fileNames)) {
-    return multipleFileFormatter(justifiedCount);
+    return multipleFileFormatter(fileDetails);
   }
-  let fileDetail = justifiedCount[0];
-  return singleFileFormatter(fileDetail);
+  let singleFileDetail = fileDetails[0];
+  return singleFileFormatter(singleFileDetail);
 };
 
 const getFileCountDetail = function (fileName, options, fs) {
   const fileContent = readFile(fileName, fs);
   let fileDetail = { count: [], fileName };
   options.forEach(option => {
-    let operation = selectOption(option);
+    let operation = selectCount(option);
     let count = operation(fileContent);
     fileDetail.count.push(count);
   });
   return fileDetail;
 };
 
-const selectOption = function (option) {
+const selectCount = function (option) {
   let options = {
     line: countLines,
     word: countWords,

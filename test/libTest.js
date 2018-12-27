@@ -8,10 +8,10 @@ const files = {
 };
 
 const fs = {
-  readFileSync: function(fileName) {
+  readFileSync: function (fileName) {
     return files[fileName];
   },
-  existsSync: function(fileName) {
+  existsSync: function (fileName) {
     return files.hasOwnProperty(fileName);
   }
 };
@@ -67,5 +67,38 @@ describe('wc', () => {
       '       0       1       9 characters\n' +
       '       0      11      29 total';
     assert.deepEqual(wc(['numbers', 'characters'], fs), expectedOutput);
+  });
+
+  it('should return number of lines, words & characters in a file with file name when two option is given', () => {
+    let expectedOutput = '       0      20 numbers';
+    assert.deepEqual(wc(['-cl', 'numbers'], fs), expectedOutput);
+
+    expectedOutput = '       1       9 characters';
+    assert.deepEqual(wc(['-cw', 'characters'], fs), expectedOutput);
+
+    expectedOutput = '       9      10 multiLineFile';
+    assert.deepEqual(wc(['-lw', 'multiLineFile'], fs), expectedOutput);
+  });
+
+  it('should return number of lines, words & characters in a file with file name when all three option is given', () => {
+    let expectedOutput = '       0      10      20 numbers';
+    assert.deepEqual(wc(['-clw', 'numbers'], fs), expectedOutput);
+
+    expectedOutput = '       0       1       9 characters';
+    assert.deepEqual(wc(['-cwl', 'characters'], fs), expectedOutput);
+
+    expectedOutput = '       9      10      20 multiLineFile';
+    assert.deepEqual(wc(['-lwc', 'multiLineFile'], fs), expectedOutput);
+  });
+
+  it('should return number of lines, words & characters in a file with file name when all three option is given', () => {
+    let expectedOutput = '       0      20 numbers';
+    assert.deepEqual(wc(['-c', '-l', 'numbers'], fs), expectedOutput);
+
+    expectedOutput = '       1       9 characters';
+    assert.deepEqual(wc(['-c', '-w', 'characters'], fs), expectedOutput);
+
+    expectedOutput = '       9      10      20 multiLineFile';
+    assert.deepEqual(wc(['-l', '-w', '-c', 'multiLineFile'], fs), expectedOutput);
   });
 });
