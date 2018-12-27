@@ -39,7 +39,7 @@ describe('wc', () => {
     assert.deepEqual(wc(['-l', 'multiLineFile'], fs), expectedOutput);
   });
 
-  it('should return number of lines in a file with file name', () => {
+  it('should return number of words in a file with file name', () => {
     let expectedOutput = '      10 numbers';
     assert.deepEqual(wc(['-w', 'numbers'], fs), expectedOutput);
 
