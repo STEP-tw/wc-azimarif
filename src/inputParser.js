@@ -1,10 +1,10 @@
 const { EMPTY_STRING, HYPHEN } = require('../src/utils/string.js');
 
-const parseInput = function (userArgs) {
-  let options = userArgs.filter((userArg) => hasOption(userArg));
+const parseInput = function(userArgs) {
+  let options = userArgs.filter(userArg => hasOption(userArg));
   let fileNames = userArgs.slice(options.length);
-  options = options.map((option) => option.replace(HYPHEN, EMPTY_STRING));
-  options = options.join(EMPTY_STRING).split(EMPTY_STRING);
+  options = options.join(EMPTY_STRING).replace(HYPHEN, EMPTY_STRING);
+  options = options.split(EMPTY_STRING);
 
   if (options.length < 1) {
     options = ['l', 'w', 'c'];
