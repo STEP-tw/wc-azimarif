@@ -1,7 +1,7 @@
 const { EMPTY_STRING, HYPHEN } = require('../src/utils/string.js');
 
 const parseInput = function(userArgs) {
-  let options = userArgs.filter(userArg => hasOption(userArg));
+  let options = getOptions(userArgs);
   let fileNames = userArgs.slice(options.length);
   options = options.join(EMPTY_STRING).replace(HYPHEN, EMPTY_STRING);
   options = options.split(EMPTY_STRING);
@@ -11,6 +11,12 @@ const parseInput = function(userArgs) {
   }
   return createParameterObject(mapOptions(options), fileNames);
 };
+
+const getOptions = function (args) {
+  let filesIndexStartsFrom = args.findIndex(startsWithoutHyphen);
+  let options = args.slice(0, filesIndexStartsFrom);
+  return options;
+}
 
 const mapOptions = function (userOptions) {
   let options = {
@@ -29,8 +35,8 @@ const createParameterObject = function (options, fileNames) {
   return { options, fileNames };
 };
 
-const hasOption = function (option) {
-  return option.startsWith(HYPHEN);
+const startsWithoutHyphen = function (option) {
+  return !option.startsWith(HYPHEN);
 };
 
 module.exports = {
